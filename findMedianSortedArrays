@@ -1,12 +1,12 @@
 findMedianSortedArrays(int A[], int B[])
- {
-m = A.length; n = B.length;
+{
+	m = A.length; n = B.length;
  	if ((m + n) % 2 != 0) 
-{// odd
+	{// odd
 		return  (findKthSmallest(A, B, (m + n) / 2, 0, m - 1, 0, n - 1));
 	}
 	else
- { // even
+ 	{ // even
 		return findKthSmallest(A, B, (m + n) / 2 - 1, 0, m - 1, 0, n - 1);
 	}
 }
@@ -22,20 +22,21 @@ findKthSmallest(int A[], int B[], int k, int aStart, int aEnd, int bStart, int b
 	if (bLen == 0)
 		return A[aStart + k];
 	if (k == 0)
-        	{
-         		if(A[aStart]<B[bStart]){
-			Display that array is in A 
-Display aStart for index
-Display A[aStart] for value on index
-} 
-         		else
-{
-             		Display that array is in B 
-Display bStart for index
-Display B[bStart] for value on index
+        {
+         	if(A[aStart]<B[bStart]){
+		Display that array is in A 
+		Display aStart for index
+		Display A[aStart] for value on index
+	} 
+        else
+	{
+             	Display that array is in B 
+		Display bStart for index
+		Display B[bStart] for value on index
+	}
+	return A[aStart] < B[bStart] ? A[aStart] : B[bStart];
 }
-		return A[aStart] < B[bStart] ? A[aStart] : B[bStart];
-        	}
+
 int aMid = aLen * k / (aLen + bLen); // a's middle count
 	int bMid = k - aMid - 1; // b's middle count
  
@@ -44,18 +45,18 @@ int aMid = aLen * k / (aLen + bLen); // a's middle count
 	bMid = bMid + bStart;
  
 	if (A[aMid] > B[bMid]) 
-{
+	{
 		// search the kth smallest but eliminate the right half of A
 		k = k - (bMid - bStart + 1);
 		aEnd = aMid;
 		bStart = bMid + 1;
 	} 
-else {
+	else 
+	{
 		// search (k–(aMid-aStart+1)th smallest but eliminate the left half of B
 		k = k - (aMid - aStart + 1);
 		bEnd = bMid;
 		aStart = aMid + 1;
 	}
- 
-	return findKthSmallest(A, B, k, aStart, aEnd, bStart, bEnd);
+ 	return findKthSmallest(A, B, k, aStart, aEnd, bStart, bEnd);
 }
